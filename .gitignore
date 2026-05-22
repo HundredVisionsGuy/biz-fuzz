@@ -1,1 +1,5 @@
 src/biz_fuzz/student_calc.py
+poetry.lock
+src/biz_fuzz/__pycache__/
+tests/__pycache__/
+data/test.txt
