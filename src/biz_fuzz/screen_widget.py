@@ -4,7 +4,7 @@ by HundredVisionsGuy
 A base class for each screen in the stacked layout
 """
 
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QVBoxLayout
 
 
 class ScreenWidget(QWidget):
