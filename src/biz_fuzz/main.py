@@ -6,6 +6,7 @@ features (view list, create list, calendar view)
 """
 
 from create_screen import CreateScreen
+from calendar_screen import CalendarScreen
 import sys
 from PySide6 import QtCore
 from PySide6.QtWidgets import (
@@ -30,6 +31,7 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
         self.nav_group = QButtonGroup(self)
+        self.nav_group.buttonClicked.connect(self.nav_selected)
         nav_widget = QWidget()
         nav_layout = QHBoxLayout()
         for option in ["home", "new", "my tasks", "calendar"]:
@@ -38,19 +40,29 @@ class MainWindow(QMainWindow):
             nav_layout.addWidget(btn)
         nav_widget.setLayout(nav_layout)
 
-        screen_layout = QStackedLayout()
+        self.screen_layout = QStackedLayout()
+        
         add_screen = CreateScreen()
-        screen_layout.addWidget(add_screen)
+        self.screen_layout.addWidget(add_screen)
+
+        calendar_screen = CalendarScreen()
+        self.screen_layout.addWidget(calendar_screen)
 
         layout.addWidget(nav_widget)
-        layout.addLayout(screen_layout)
+        layout.addLayout(self.screen_layout)
 
         widget = QWidget()
         widget.setLayout(layout)
 
         # Set the central widget of the Window.
         self.setCentralWidget(widget)
-        
+    
+    def nav_selected(self, button):
+        match button.text():
+            case "calendar":
+                self.screen_layout.setCurrentIndex(1)
+            case "new":
+                self.screen_layout.setCurrentIndex(0)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QPushButton,
     QRadioButton,
+    QHBoxLayout,
     QVBoxLayout,
     QWidget)
 from screen_widget import ScreenWidget
@@ -18,21 +19,35 @@ from screen_widget import ScreenWidget
 class CreateScreen(ScreenWidget):
     def __init__(self):
         super().__init__()
-        title_label = QLabel("Create a Todo list by adding todo items.")
+        self.title_label.setText("Create a Todo list.")
 
         # Widgets to create a Todo Item
-        self.name_input = QLineEdit()
-        self.name_input.setPlaceholderText("What do you want to do?")
+        # Todo List Name
+        todo_name_layout = QHBoxLayout()
+        todo_name_label = QLabel("Name Your ToDO List:")
+        self.todo_name_input = QLineEdit()
+        self.todo_name_input.setPlaceholderText("Todo List Name")
+        todo_name_layout.addWidget(todo_name_label)
+        todo_name_layout.addWidget(self.todo_name_input)
 
+        # Todo Item Description
+        item_description_layout = QHBoxLayout()
+        item_description_label = QLabel("Your Todo Description: ")
+        self.todo_description_input = QLineEdit()
+        self.todo_description_input.setPlaceholderText("What do you want to do?")
+        item_description_layout.addWidget(item_description_label)
+        item_description_layout.addWidget(self.todo_description_input)
+
+        # Todo Priority
         self.priority_label = QLabel("Set Priority Level ")
 
         # NOTE: a QButtonGroup is not a widget
         self.priority_group = QButtonGroup()
-        self.priority_group.setExclusive(False)
+        self.priority_group.setExclusive(True)
 
         # We have to set a widget for the QButtonGroup
         priority_widget = QWidget()
-        priority_layout = QVBoxLayout()
+        priority_layout = QHBoxLayout()
 
         # Add buttons to the group and the layout
         for option in ["High", "Medium", "Low"]:
@@ -56,22 +71,33 @@ class CreateScreen(ScreenWidget):
         self.todo_layout = QVBoxLayout()
         self.todo_container.setLayout(self.todo_layout)
 
+        # Save / Clear List
+        save_clear_layout = QHBoxLayout()
+        save_list_button = QPushButton("Save")
+        save_list_button.clicked.connect(self.save_list)
+
+        clear_list_button = QPushButton("Clear")
+        clear_list_button.clicked.connect(self.clear_list)
+        save_clear_layout.addWidget(save_list_button)
+        save_clear_layout.addWidget(clear_list_button)
+
         # add widgets & layouts to main layout
-        self.layout.addWidget(title_label)
-        self.layout.addWidget(self.name_input)
+        self.layout.addLayout(todo_name_layout)
+        self.layout.addLayout(item_description_layout)
         self.layout.addWidget(self.priority_label)
         self.layout.addWidget(priority_widget)
         self.layout.addWidget(add_todo_button)
         self.layout.addWidget(output_label)
         self.layout.addWidget(self.todo_container)
+        self.layout.addLayout(save_clear_layout)
 
         # [OPTIONAL] Add a stretch to move everything up
         self.layout.addStretch()
 
     
     def add_todo_item(self):
-        todo_name = self.name_input.text()
-        self.name_input.setText("")
+        todo_name = self.todo_description_input.text()
+        self.todo_description_input.setText("")
 
         checked_priority = self.priority_group.checkedButton()
         todo_priority = checked_priority.text()
@@ -81,3 +107,9 @@ class CreateScreen(ScreenWidget):
         todo_button = QCheckBox(todo_string)
         self.todo_list.addButton(todo_button)
         self.todo_layout.addWidget(todo_button)
+
+    def save_list(self):
+        pass
+
+    def clear_list(self):
+        pass
