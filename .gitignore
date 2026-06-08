@@ -3,3 +3,4 @@ poetry.lock
 src/biz_fuzz/__pycache__/
 tests/__pycache__/
 data/test.txt
+data/

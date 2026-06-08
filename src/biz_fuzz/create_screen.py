@@ -3,6 +3,8 @@ create_screen.py
 by HundredVisionsGuy
 A base class for each screen in the stacked layout
 """
+import controller
+import json
 
 from PySide6.QtWidgets import (
     QButtonGroup,
@@ -109,7 +111,36 @@ class CreateScreen(ScreenWidget):
         self.todo_layout.addWidget(todo_button)
 
     def save_list(self):
-        pass
+        # Get data from list
+        list_title = self.todo_name_input.text()
+        todo_dict = {
+            "title": list_title,
+            "items": []
+        }
+
+        todo_btns = self.todo_list.buttons()
+        todo_list = []
+        for btn in todo_btns:
+            text = btn.text()
+            todo_item = text.split(" -> ")
+            todo = {"description": todo_item[0],
+                    "priority": todo_item[1]}
+            todo_list.append(todo)
+
+        # Store as a dictionary
+        list_title += ".json"
+        list_title = "todo_lists/" + list_title
+        todo_dict["items"] = todo_list
+        todo_json = json.dumps(todo_dict)
+
+        # Save it to data folder
+        success = controller.store_data(list_title, todo_json)
+
+        # Clear List
+        if success:
+            self.clear_list()
+
+        print("ERROR")
 
     def clear_list(self):
         pass
