@@ -129,7 +129,7 @@ class CreateScreen(ScreenWidget):
 
         # Store as a dictionary
         list_title += ".json"
-        list_title = "todo_lists/" + list_title
+        # list_title = "todo_lists/" + list_title
         todo_dict["items"] = todo_list
         todo_json = json.dumps(todo_dict)
 

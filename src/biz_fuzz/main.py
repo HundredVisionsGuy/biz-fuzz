@@ -86,8 +86,10 @@ class MainWindow(QMainWindow):
     def nav_selected(self, button):
         match button.text():
             case "calendar":
-                self.screen_layout.setCurrentIndex(1)
+                self.screen_layout.setCurrentIndex(2)
             case "new":
+                self.screen_layout.setCurrentIndex(1)
+            case "home":
                 self.screen_layout.setCurrentIndex(0)
 
     def set_fonts(self):

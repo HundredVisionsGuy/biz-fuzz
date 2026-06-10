@@ -12,7 +12,6 @@ import os
 data_path = "data/"
 todo_list_path = "data/todo_lists/"
 
-
 # functions
 def store_data(filename: str, data: str, dir="data/todo_lists/") -> bool:
     """stores data to file and returns if it was successful"""
@@ -25,7 +24,6 @@ def store_data(filename: str, data: str, dir="data/todo_lists/") -> bool:
         print(str(e))
         return False
     return True
-
 
 def get_data(filename: str) -> str:
     """gets data from file"""
