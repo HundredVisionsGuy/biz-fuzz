@@ -39,3 +39,4 @@ class HomeScreen(QWidget):
             no_items = "To get started, click the new button to create a todo"
             no_items += " list."
             self.description_label.setText(no_items)
+        self.my_todo_lists.addItems(todo_items)

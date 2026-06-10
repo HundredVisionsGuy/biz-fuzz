@@ -13,7 +13,8 @@ data_path = "data/"
 todo_list_path = "data/todo_lists/"
 
 # functions
-def store_data(filename: str, data: str, dir="data/todo_lists/") -> bool:
+def store_data(filename: str, data: str,
+               dir="data/todo_lists/") -> bool:
     """stores data to file and returns if it was successful"""
     file_path = dir + filename
     try:

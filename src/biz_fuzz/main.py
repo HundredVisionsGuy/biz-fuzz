@@ -62,13 +62,13 @@ class MainWindow(QMainWindow):
 
         self.screen_layout = QStackedLayout()
         
-        home_screen = HomeScreen()
-        add_screen = CreateScreen()
-        self.screen_layout.addWidget(home_screen)
-        self.screen_layout.addWidget(add_screen)
+        self.home_screen = HomeScreen()
+        self.add_screen = CreateScreen()
+        self.screen_layout.addWidget(self.home_screen)
+        self.screen_layout.addWidget(self.add_screen)
 
-        calendar_screen = CalendarScreen()
-        self.screen_layout.addWidget(calendar_screen)
+        self.calendar_screen = CalendarScreen()
+        self.screen_layout.addWidget(self.calendar_screen)
 
         # center vertically by adding stretch at the beginning and the end
         layout.addSpacing(20)
@@ -90,6 +90,7 @@ class MainWindow(QMainWindow):
             case "new":
                 self.screen_layout.setCurrentIndex(1)
             case "home":
+                self.home_screen.populate_todo_items()
                 self.screen_layout.setCurrentIndex(0)
 
     def set_fonts(self):
