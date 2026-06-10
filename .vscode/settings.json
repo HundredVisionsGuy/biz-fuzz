@@ -3,5 +3,14 @@
         "tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "workbench.statusBar.visible": true,
+    "editor.suggest.showStatusBar": true,
+    "editor.columnSelection": true,
+    "editor.rulers": [
+        {
+            "color": "#777",
+            "column": 79,
+        }
+    ]
 }

@@ -139,8 +139,8 @@ class CreateScreen(ScreenWidget):
         # Clear List
         if success:
             self.clear_list()
-
-        print("ERROR")
+        else:
+            print("ERROR")
 
     def clear_list(self):
         pass

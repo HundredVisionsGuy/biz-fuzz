@@ -7,6 +7,7 @@ features (view list, create list, calendar view)
 
 from create_screen import CreateScreen
 from calendar_screen import CalendarScreen
+from home_screen import HomeScreen
 import sys
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont, QFontDatabase
@@ -61,7 +62,9 @@ class MainWindow(QMainWindow):
 
         self.screen_layout = QStackedLayout()
         
+        home_screen = HomeScreen()
         add_screen = CreateScreen()
+        self.screen_layout.addWidget(home_screen)
         self.screen_layout.addWidget(add_screen)
 
         calendar_screen = CalendarScreen()
